@@ -1,8 +1,22 @@
-import { serve } from "./deps.js";
+import { 
+	configure, renderFile 
+} from "./deps.js";
+
+configure({
+	views: `${Deno.cwd()}/views/`,
+}); 
+
+const responseDetails = {
+	headers: { "Content-Type": "text/html;charset=UTF-8"},
+}; 
+
+const data = {}; 
 
 const handleRequest = async (request) => {
-  console.log("Responding with Hello world!");
-  return new Response("Hello world!");
+	return new Response(await renderFile("index.eta", data), responseDetails);
 };
 
-serve(handleRequest, { port: 7777 });
+Deno.serve(
+  { port: 7777, hostname: "0.0.0.0" },
+  handleRequest,
+);
