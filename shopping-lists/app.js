@@ -16,7 +16,6 @@ const handleRequest = async (request) => {
 		console.log("Create lists"); 
 		return await listController.createList(request); 
 	} else if (url.pathname === "/lists" && request.method === "GET") {
-		console.log("View lists"); 
 		return await listController.viewLists(); 
 	} else {
 		return new Response("Not found", { status: 404 }); 

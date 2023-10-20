@@ -12,8 +12,9 @@ const viewLists = async () => {
 const createList = async (request) => {
 	const formData = await request.formData(); 
 	const name = formData.get("name");
-
-	await listService.create(name); 
+	if (name != "") {
+		await listService.create(name); 
+	}
 
 	return redirectTo("/lists"); 
 }
