@@ -1,12 +1,12 @@
 <% layout("./layouts/layout.eta") %>
 
 <h1>
-	Shared shopping lists
+	Shared shopping lists - Lists
 </h1>
 
 <form method="POST" action="/lists">
 	<div class="form-group">
-		<h5> Add new shopping list: </h2>
+		<h5>Add new shopping list:</h5>
 		<label for="name">List name: </label>
 		<input class="form-control" type="text" id="name" name="name" placeholder="Enter list name"/>
 	</div>
