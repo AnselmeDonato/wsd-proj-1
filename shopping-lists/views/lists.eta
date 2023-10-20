@@ -4,12 +4,16 @@
 	Shared shopping lists
 </h1>
 
-<div class="form-group">
-	<label for="name">Name: </label>
-	<input class="form-control" type="text" id="name" name="name" />
-</div>
+</form>
+	<div class="form-group">
+		<h5> Add new shopping list: </h2>
+		<label for="name">List name: </label>
+		<input class="form-control" type="text" id="name" name="name" placeholder="Enter list name"/>
+	</div>
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
-Shopping lists: 
+<h5> Shopping lists: </h5>
 <ul class="list-group">
 <% it.lists.forEach((list) => { %>
 	<li> <%= list.name %>
