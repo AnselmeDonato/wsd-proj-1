@@ -1,10 +1,6 @@
 import { renderFile } from "../deps.js"; 
+import { redirectTo, responseDetails } from "../utils/requestUtils.js"; 
 import * as listService from "../services/listService.js"; 
-
-
-const responseDetails = {
-	headers: { "Content-Type": "text/html;charset=UTF-8"},
-};
 
 const viewLists = async () => {
 	const data = {
@@ -13,4 +9,13 @@ const viewLists = async () => {
 	return new Response(await renderFile("lists.eta", data), responseDetails);
 };
 
-export {viewLists}; 
+const createList = async (request) => {
+	const formData = await request.formData(); 
+	const name = formData.get("name");
+
+	await listService.create(name); 
+
+	return redirectTo("/lists"); 
+}
+
+export {viewLists, createList}; 

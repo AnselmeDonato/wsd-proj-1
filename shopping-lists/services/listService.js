@@ -4,4 +4,8 @@ const getAll = async () => {
 	return await sql`SELECT * FROM shopping_lists`; 
 }; 
 
-export { getAll }; 
+const create = async (name) => {
+	return await sql`INSERT INTO shopping_lists (name) VALUES (${ name })`
+}
+
+export { getAll, create }; 

@@ -1,8 +1,5 @@
 import { renderFile } from "../deps.js"; 
-
-const responseDetails = {
-	headers: { "Content-Type": "text/html;charset=UTF-8"},
-};
+import { responseDetails } from "../utils/requestUtils.js"; 
 
 const viewIndex = async () => {
 	const data = {};

@@ -12,7 +12,11 @@ const handleRequest = async (request) => {
 
 	if (url.pathname === "/" && request.method === "GET") {
 		return await indexController.viewIndex(); 
+	} else if (url.pathname === "/lists" && request.method === "POST") {
+		console.log("Create lists"); 
+		return await listController.createList(request); 
 	} else if (url.pathname === "/lists" && request.method === "GET") {
+		console.log("View lists"); 
 		return await listController.viewLists(); 
 	} else {
 		return new Response("Not found", { status: 404 }); 
