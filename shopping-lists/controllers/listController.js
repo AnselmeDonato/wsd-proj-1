@@ -10,7 +10,7 @@ const viewLists = async () => {
 	const data = {
 	  lists: await listService.getAll(),
 	};
-	return new Response(await renderFile("index.eta", data), responseDetails);
+	return new Response(await renderFile("lists.eta", data), responseDetails);
 };
 
 export {viewLists}; 
