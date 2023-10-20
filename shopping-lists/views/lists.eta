@@ -18,5 +18,4 @@
 <% it.lists.forEach((list) => { %>
 	<li class="list-group-item"> <%= list.name %> </li>
 <% });%>
-	<li class="list-group-item"> Hardcoded </li>
 </ul>
