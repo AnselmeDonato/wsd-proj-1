@@ -1,22 +1,18 @@
-import { 
-	configure, renderFile 
-} from "./deps.js";
+import { configure } from "./deps.js"; 
+import * as listController from "./controllers/listController.js"; 
+
 
 configure({
 	views: `${Deno.cwd()}/views/`,
 }); 
 
-const responseDetails = {
-	headers: { "Content-Type": "text/html;charset=UTF-8"},
-}; 
-
-const data = {}; 
 
 const handleRequest = async (request) => {
-	return new Response(await renderFile("index.eta", data), responseDetails);
+	return await listController.viewLists(); 
 };
 
 Deno.serve(
   { port: 7777, hostname: "0.0.0.0" },
   handleRequest,
 );
+
