@@ -4,6 +4,8 @@
 	Shared shopping lists - Lists
 </h1>
 
+<a href="/">Main page</a>
+
 <form method="POST" action="/lists">
 	<div class="form-group">
 		<h5>Add new shopping list:</h5>

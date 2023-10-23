@@ -1,6 +1,8 @@
 <% layout("./layouts/layout.eta") %>
 
 <% it.lists.forEach((list) => { %>
-<% /* There should be only one element in lists. This is ugly bu I don't know better */ %>
+<% /* There should be only one element in lists. This is ugly af but I don't know any better to access the data from the SQL query*/ %>
 	<h1> List: <%= list.name %> </h1>
 <% });%>
+
+<a href="/">Shopping lists</a>
