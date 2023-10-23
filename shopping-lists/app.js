@@ -16,10 +16,19 @@ const handleRequest = async (request) => {
 		return await listController.createList(request); 
 	} else if (url.pathname === "/lists" && request.method === "GET") {
 		return await listController.viewLists(); 
+	} else if (url.pathname.match("/lists/[0-9]+") && request.method === "GET") {
+		return await listController.viewLists(); 
+	} else if (url.pathname.match("/lists/[0-9]+/deactivate") && request.method === "POST") {
+		console.log("deactivate")
+		return await listController.deactivateByRequest(request); 
 	} else {
 		return new Response("Not found", { status: 404 }); 
 	}
 };
+
+const hello = () => {
+	console.log("I just came to say hello"); 
+}
 
 Deno.serve(
   { port: 7777, hostname: "0.0.0.0" },

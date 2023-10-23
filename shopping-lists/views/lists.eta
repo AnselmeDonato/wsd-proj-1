@@ -16,6 +16,13 @@
 <h5> Shopping lists: </h5>
 <ul class="list-group">
 <% it.lists.forEach((list) => { %>
-	<li class="list-group-item"> <%= list.name %> </li>
+	<li class="list-group-item"> 
+		<form method="GET" action="/lists/<%= list.id %>">
+		<%= list.name %>
+		</form>
+		<form method="POST" action="/lists/<%= list.id %>/deactivate">
+		<button type="submit" class="btn btn-primary float-right">Deactivate list!</button>
+		</form>
+	</li>
 <% });%>
 </ul>

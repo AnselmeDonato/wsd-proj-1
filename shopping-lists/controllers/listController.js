@@ -19,4 +19,11 @@ const createList = async (request) => {
 	return redirectTo("/lists"); 
 }
 
-export {viewLists, createList}; 
+const deactivateByRequest = async(request) => {
+	const url = new URL(request.url); 
+	const urlParts = url.pathname.split("/"); 
+	await listService.deactivateById(urlParts[2])
+	return redirectTo("/lists"); 
+}
+
+export {viewLists, createList, deactivateByRequest}; 
