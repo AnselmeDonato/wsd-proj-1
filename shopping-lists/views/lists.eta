@@ -17,9 +17,7 @@
 <ul class="list-group">
 <% it.lists.forEach((list) => { %>
 	<li class="list-group-item"> 
-		<form method="GET" action="/lists/<%= list.id %>">
-		<%= list.name %>
-		</form>
+		<a href="/lists/<%= list.id %>"><%= list.name %></a>
 		<form method="POST" action="/lists/<%= list.id %>/deactivate">
 		<button type="submit" class="btn btn-primary float-right">Deactivate list!</button>
 		</form>

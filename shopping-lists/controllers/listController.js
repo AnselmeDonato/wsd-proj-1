@@ -9,6 +9,16 @@ const viewLists = async () => {
 	return new Response(await renderFile("lists.eta", data), responseDetails);
 };
 
+const viewListById = async(request) => {
+	const url = new URL(request.url); 
+	const urlParts = url.pathname.split("/");
+
+	const data = {
+		lists: await listService.getById(urlParts[2]),
+	  };
+	return new Response(await renderFile("list.eta", data), responseDetails);
+}
+
 const createList = async (request) => {
 	const formData = await request.formData(); 
 	const name = formData.get("name");
@@ -26,4 +36,4 @@ const deactivateByRequest = async(request) => {
 	return redirectTo("/lists"); 
 }
 
-export {viewLists, createList, deactivateByRequest}; 
+export {viewLists, createList, deactivateByRequest, viewListById}; 

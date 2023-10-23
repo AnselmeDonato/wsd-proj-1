@@ -1,0 +1,6 @@
+<% layout("./layouts/layout.eta") %>
+
+<% it.lists.forEach((list) => { %>
+<% /* There should be only one element in lists. This is ugly bu I don't know better */ %>
+	<h1> List: <%= list.name %> </h1>
+<% });%>
