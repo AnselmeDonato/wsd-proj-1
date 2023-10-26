@@ -1,6 +1,7 @@
 import { renderFile } from "../deps.js"; 
 import { redirectTo, responseDetails } from "../utils/requestUtils.js"; 
 import * as listService from "../services/listService.js"; 
+import * as itemService from "../services/itemService.js"; 
 
 const viewLists = async () => {
 	const data = {
@@ -15,6 +16,7 @@ const viewListById = async(request) => {
 
 	const data = {
 		lists: await listService.getById(urlParts[2]),
+		items: await itemService.getByListId(urlParts[2]), 
 	  };
 	return new Response(await renderFile("list.eta", data), responseDetails);
 }
