@@ -3,17 +3,23 @@
 <% it.lists.forEach((list) => { %>
 <% /* There should be only one element in lists. This is ugly af but I don't know any better to access the data from the SQL query*/ %>
 	<h1> List: <%= list.name %> </h1>
-<% });%>
 
-<ul class="list-group">
-<% it.items.forEach((item) => { %>
-	<li class="list-group-item"> 
-		<%= item.name %>
-		<% /* <form method="POST" action="/lists/<%= list.id %>/deactivate">
-		<button type="submit" class="btn btn-primary float-right">Deactivate list!</button>
-		</form> */ %>
-	</li>
-<% });%>
-</ul>
+	<form method="POST" action="/lists/<%= list.id %>/items">
+		<div class="form-group">
+			<h5>Add new item to shopping list:</h5>
+			<label for="name">Item name: </label>
+			<input class="form-control" type="text" id="name" name="name" placeholder="Enter item name"/>
+		</div>
+		<button type="submit" class="btn btn-primary">Add item</button>
+	</form>
 
-<a href="/">Shopping lists</a>
+	<ul class="list-group">
+	<% it.items.forEach((item) => { %>
+		<li class="list-group-item"> 
+			<%= item.name %>
+		</li>
+	<% });%>
+	</ul>
+
+	<a href="/">Shopping lists</a>
+<% });%>

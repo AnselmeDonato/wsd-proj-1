@@ -1,6 +1,7 @@
 import { configure } from "./deps.js"; 
 import * as listController from "./controllers/listController.js"; 
 import * as indexController from "./controllers/indexController.js"; 
+import * as itemController from "./controllers/itemController.js"; 
 
 
 configure({
@@ -26,6 +27,8 @@ const handleRequest = async (request) => {
 	// Single list page
 	} else if (url.pathname.match("/lists/[0-9]+") && request.method === "GET") {
 		return await listController.viewListById(request); 
+	} else if (url.pathname.match("/lists/[0-9]+/items") && request.method === "POST") {
+		return await itemController.addItem(request); 
 	
 	// Else
 	} else {
