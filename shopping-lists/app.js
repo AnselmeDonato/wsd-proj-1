@@ -27,6 +27,8 @@ const handleRequest = async (request) => {
 	// Single list page
 	} else if (url.pathname.match("/lists/[0-9]+") && request.method === "GET") {
 		return await listController.viewListById(request); 
+	} else if (url.pathname.match("/lists/[0-9]+/items/[0-9]+/collect") && request.method === "POST") {
+		return await itemController.collectItem(request); 
 	} else if (url.pathname.match("/lists/[0-9]+/items") && request.method === "POST") {
 		return await itemController.addItem(request); 
 	

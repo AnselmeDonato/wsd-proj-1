@@ -16,7 +16,15 @@
 	<ul class="list-group">
 	<% it.items.forEach((item) => { %>
 		<li class="list-group-item"> 
-			<%= item.name %>
+			<% if(item.collected) { %>
+			<del> <%= item.name %> </del>
+			<% } else {%>
+			<%= item.name %> 
+			<% } %>
+			
+			<form method="POST" action="/lists/<%= list.id %>/items/<%= item.id %>/collect">
+			<button type="submit" class="btn btn-primary float-right">Mark collected!</button>
+			</form>
 		</li>
 	<% });%>
 	</ul>

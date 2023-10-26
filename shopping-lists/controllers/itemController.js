@@ -15,4 +15,11 @@ const addItem = async (request) => {
 	return redirectTo(`/lists/${urlParts[2]}`); 
 }
 
-export {addItem}; 
+const collectItem = async(request) => {
+	const url = new URL(request.url); 
+	const urlParts = url.pathname.split("/"); 
+	await itemService.markCollectedById(urlParts[4]); 
+	return redirectTo(`/lists/${urlParts[2]}`); 
+}
+
+export {addItem, collectItem}; 
