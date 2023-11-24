@@ -7,11 +7,15 @@
 <a href="/lists" class="link-primary">Lists</a>
 
 <h5> Statistics: </h5>
+<% if(it.nbLists[0].count != 0) {%>
 <ul class="list-group">
 	<li class="list-group-item"> 
-		Number of shopping lists created: <%= it.nbLists[0].count%>
+		Shopping lists: <%= it.nbLists[0].count%>
 	</li>
 	<li class="list-group-item"> 
-		Number of shopping items created: <%= it.nbItems[0].count%>
+		Shopping list items: <%= it.nbItems[0].count%>
 	</li>
 </ul> 
+<%} else {%>
+No shopping lists yet.
+<%} %>
