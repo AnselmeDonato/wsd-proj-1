@@ -2,24 +2,24 @@ import { renderFile } from "../deps.js";
 import { redirectTo, responseDetails } from "../utils/requestUtils.js"; 
 import * as itemService from "../services/itemService.js"; 
 
-const addItem = async (request) => {
-	const url = new URL(request.url); 
-	const urlParts = url.pathname.split("/");
+const addItem = async (request, mappingResult) => {
+	const idList = mappingResult.pathname.groups.idList;
 
 	const formData = await request.formData(); 
 	const name = formData.get("name");
 	if (name != "") {
-		await itemService.create(urlParts[2], name); 
+		await itemService.create(idList, name); 
 	}
 
-	return redirectTo(`/lists/${urlParts[2]}`); 
+	return redirectTo(`/lists/${idList}`); 
 }
 
-const collectItem = async(request) => {
-	const url = new URL(request.url); 
-	const urlParts = url.pathname.split("/"); 
-	await itemService.markCollectedById(urlParts[4]); 
-	return redirectTo(`/lists/${urlParts[2]}`); 
+const collectItem = async(_request, mappingResult) => {
+	const idList = mappingResult.pathname.groups.idList;
+	const idItem = mappingResult.pathname.groups.idItem;
+
+	await itemService.markCollectedById(idItem); 
+	return redirectTo(`/lists/${idList}`); 
 }
 
 export {addItem, collectItem}; 

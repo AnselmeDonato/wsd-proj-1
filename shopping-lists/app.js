@@ -8,38 +8,68 @@ configure({
 	views: `${Deno.cwd()}/views/`,
 }); 
 
-const handleRequest = async (request) => {
-	const url = new URL(request.url); 
-
+const urlMapping = [
 	// Main page
-	if (url.pathname === "/" && request.method === "GET") {
-		return await indexController.viewIndex(); 
-	} else if (url.pathname === "/lists" && request.method === "GET") {
-		return await listController.viewLists(); 
+	{
+	  method: "GET",
+	  pattern: new URLPattern({ pathname: "/" }),
+	  fn: indexController.viewIndex,
+	},
 
-	// All lists page
-	} else if (url.pathname === "/lists" && request.method === "POST") {
-		return await listController.createList(request); 
-	} else if (url.pathname.match("/lists/[0-9]+/deactivate") && request.method === "POST") {
-		console.log("deactivate")
-		return await listController.deactivateByRequest(request); 
+	// All lists page 
+	{
+	  method: "GET",
+	  pattern: new URLPattern({ pathname: "/lists" }),
+	  fn: listController.viewLists,
+	},
+	{
+	  method: "POST",
+	  pattern: new URLPattern({ pathname: "/lists" }),
+	  fn: listController.createList,
+	},
+	{
+		method: "POST",
+		pattern: new URLPattern({ pathname: "/lists/:idList/deactivate" }),
+		fn: listController.deactivateByRequest,
+  },
 
-	// Single list page
-	} else if (url.pathname.match("/lists/[0-9]+") && request.method === "GET") {
-		return await listController.viewListById(request); 
-	} else if (url.pathname.match("/lists/[0-9]+/items/[0-9]+/collect") && request.method === "POST") {
-		return await itemController.collectItem(request); 
-	} else if (url.pathname.match("/lists/[0-9]+/items") && request.method === "POST") {
-		return await itemController.addItem(request); 
-	
-	// Else
-	} else {
-		return new Response("Not found", { status: 404 }); 
+  // Single list page
+	{
+		method: "GET",
+		pattern: new URLPattern({ pathname: "/lists/:idList" }),
+		fn: listController.viewListById,
+  },
+	{
+		method: "POST",
+		pattern: new URLPattern({ pathname: "/lists/:idList/items/:idItem/collect" }),
+		fn: itemController.collectItem,
+  },
+	{
+		method: "POST",
+		pattern: new URLPattern({ pathname: "/lists/:idList/items" }),
+		fn: itemController.addItem,
+  },
+];
+
+
+const handleRequest = async (request) => {
+	const mapping = urlMapping.find(
+	  (um) => um.method === request.method && um.pattern.test(request.url)
+	);
+  
+	if (!mapping) {
+	  return new Response("Not found", { status: 404 });
+	}
+  
+	const mappingResult = mapping.pattern.exec(request.url);
+	try {
+    return await mapping.fn(request, mappingResult);
+	} catch (e) {
+	  console.log(e);
+	  return new Response(e.stack, { status: 500 }); 
 	}
 };
 
-Deno.serve(
-  { port: 7777, hostname: "0.0.0.0" },
-  handleRequest,
-);
-
+console.log("starting"); 
+const portConfig = { port: 7777, hostname: '0.0.0.0'}; 
+Deno.serve(portConfig, handleRequest);
