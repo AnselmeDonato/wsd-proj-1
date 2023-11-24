@@ -1,5 +1,4 @@
-import { renderFile } from "../deps.js"; 
-import { redirectTo, responseDetails } from "../utils/requestUtils.js"; 
+import { redirectTo } from "../utils/requestUtils.js"; 
 import * as itemService from "../services/itemService.js"; 
 
 const addItem = async (request, mappingResult) => {
