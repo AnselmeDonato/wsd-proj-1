@@ -3,6 +3,8 @@
 <% it.lists.forEach((list) => { %>
 <% /* There should be only one element in lists. This is ugly af but I don't know any better to access the data from the SQL query*/ %>
 	<h1> List: <%= list.name %> </h1>
+	
+	<a href="/">Main Page</a> 
 
 	<form method="POST" action="/lists/<%= list.id %>/items">
 		<div class="form-group">
@@ -36,5 +38,4 @@
 	<% });%>
 	</ul>
 
-	<a href="/">Shopping lists</a>
 <% });%>
