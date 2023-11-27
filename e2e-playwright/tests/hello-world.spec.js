@@ -32,3 +32,15 @@ test("Can deactivate a list", async ({ page }) => {
 	await expect(page.locator(`li >> text='${listName}'`)).toHaveCount(0);
 });
 
+test("Can navigate to a list", async ({ page }) => {
+  // Crating the list to navigate to 
+	await page.goto("/lists");
+	const listName = "Test me"; 
+	await page.locator("input[type=text]").type(listName);
+	await page.getByRole("button", {name : "Create list"}).click();
+	await expect(page.locator(`li >> text='${listName}'`)).toHaveText(listName);
+  
+  // Actually deactivating the list 
+  await page.locator(`a >> text='${listName}'`).click();
+  await expect(page.locator("h1")).toHaveText(`List: ${listName}`); 
+});
