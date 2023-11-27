@@ -40,7 +40,7 @@ test("Can navigate to a list", async ({ page }) => {
 	await page.getByRole("button", {name : "Create list"}).click();
 	await expect(page.locator(`li >> text='${listName}'`)).toHaveText(listName);
   
-  // Actually deactivating the list 
+  // Actually mavigating to the list 
   await page.locator(`a >> text='${listName}'`).click();
   await expect(page.locator("h1")).toHaveText(`List: ${listName}`); 
 });
