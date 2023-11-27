@@ -4,7 +4,7 @@
 <% /* There should be only one element in lists. This is ugly af but I don't know any better to access the data from the SQL query*/ %>
 	<h1>List: <%= list.name %></h1>
 	
-	<a href="/">Main Page </a> 
+	<a href="/lists">Shopping lists </a> 
 
 	<form method="POST" action="/lists/<%= list.id %>/items">
 		<div class="form-group">
