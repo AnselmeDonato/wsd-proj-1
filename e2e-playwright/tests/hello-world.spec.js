@@ -11,7 +11,7 @@ test("Lists page linked in Main page", async ({ page }) => {
   await expect(page).toHaveURL("http://localhost:7777/lists"); 
 });
 
-test("Can create a task", async ({ page }) => {
+test("Can create a list", async ({ page }) => {
 	await page.goto("/lists");
 	const listName = `My list: ${Math.random()}`;
 	await page.locator("input[type=text]").type(listName);
@@ -19,7 +19,7 @@ test("Can create a task", async ({ page }) => {
 	await expect(page.locator(`li >> text='${listName}'`)).toHaveText(listName);
 });
 
-test("Can deactivate a task", async ({ page }) => {
+test("Can deactivate a list", async ({ page }) => {
   // Crating the list to deactivate 
 	await page.goto("/lists");
 	const listName = "Deactivate me"; 
@@ -31,3 +31,4 @@ test("Can deactivate a task", async ({ page }) => {
 	await page.locator(`button:right-of(:has-text("${listName}"))`).first().click();
 	await expect(page.locator(`li >> text='${listName}'`)).toHaveCount(0);
 });
+
