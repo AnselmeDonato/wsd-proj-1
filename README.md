@@ -22,6 +22,6 @@ Assuming that you have docker-compose, you can follow the following steps to run
 
 #### Tests 
 
-This project comes with five small tests (cf folder `e2e-playwright`). Assuming that you have docker-compose, you can follow the following steps to run the application locally: 
+This project comes with five small automated tests (in `e2e-playwright/tests/hello-world.spec.js`). Assuming that you have docker-compose, you can follow the following steps to run the application locally: 
 - get a local copy of the code (you can do this from the github repository at `https://github.com/AnselmeDonato/wsd-proj-1`)
 - run the command `docker compose run --entrypoint=npx e2e-playwright playwright test && docker compose rm -sf` in the root directory 
